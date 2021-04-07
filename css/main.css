@@ -1,0 +1,64 @@
+:root {
+    --home-bg-color: #AC2B37;
+    --grey: #707070;
+    --light-grey: #B9C2CA;
+    --red: #AC2B37;
+}
+
+body {
+    height: 100vh;
+}
+
+h1 {
+    font-family: Verdana;
+    font-weight: bold;
+}
+
+h4 {
+    font-family: Verdana;
+    color: var(--grey)
+}
+
+h5 {
+    font-family: Verdana;
+    color: var(--grey);
+}
+
+p {
+    font-family: Verdana;
+    color: var(--grey);
+    font-size: 1rem;
+}
+
+.nav-white {
+    background-color: white;
+}
+
+.nav-link {
+    background-color: rgba(0,0,0,0);
+    color: var(--light-grey)
+}
+
+.nav-link:hover{
+    text-decoration: underline;
+    /*font-weight: bold;*/
+    color: var(--light-grey);
+}
+
+.nav-item-lg {
+    font-size: 1.5rem;
+}
+
+/*.active {*/
+/*    font-weight: bold;*/
+/*}*/
+
+.title-text {
+    color: var(--red);
+    margin: 2em 0 2em 0;
+}
+
+.card-transparent {
+    outline: rgba(0,0,0,0);
+    box-shadow: rgba(0,0,0,0);
+}

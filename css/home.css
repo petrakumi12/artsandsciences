@@ -1,0 +1,8 @@
+body {
+    background-color: var(--home-bg-color) !important;
+    height: 100vh;
+}
+
+h1 {
+    color: var(--light-grey);
+}

@@ -1,0 +1,13 @@
+.footer-text {
+    color: white;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.blurry-borders {
+    box-shadow: 0 0 15px 20px #ffffff;
+}
