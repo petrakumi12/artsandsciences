@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
 body {
     background-color: var(--home-bg-color) !important;
     height: 100vh;
@@ -5,4 +7,22 @@ body {
 
 h1 {
     color: var(--light-grey);
+    font-family: 'Times New Roman',serif !important;
+    letter-spacing: 0.3rem;
+
+    font-size: 4rem;
 }
+
+h2 {
+    color: var(--light-grey);
+    font-weight: normal;
+    font-size: 1.9rem;
+}
+
+a {
+    letter-spacing: 0.1rem;
+}
+
+/*font-family: 'Times New Roman',serif !important;*/
+/*font-family: 'Verdana',serif;*/
+/*font-family: 'Sacramento', cursive;*/

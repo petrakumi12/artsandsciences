@@ -33,71 +33,49 @@
         <div class="col">
             <img src="../images/wpi%20grey.png" style="height: 3rem">
         </div>
-        <li class="nav-item">
-            <a class="nav-link nav-item-lg" href="../index.html">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link nav-item-lg" href="programs.html">Program List</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link nav-item-lg active" href="grad-talks.html">Graduate Talks</a>
-        </li>
+        <div class="row">
+            <li class="nav-item">
+                <a class="nav-link nav-item-md" href="../index.html">HOME</a>
+                <hr/>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-item-md" href="schedule.html">SCHEDULE</a>
+                <hr/>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-item-md active" href="#">ABSTRACTS</a>
+                <hr/>
+            </li>
+        </div>
     </ul>
-    <h1 class="text-center title-text sticky-top py-5 my-0">
-        Graduate Lighting Talks
+    <h1 class="text-center title-text sticky-top pt-5 pb-4 my-0">
+        Submission Abstracts
     </h1>
     <div class="row w-100 no-gutters pb-4 blurry-borders align-items-center justify-content-center">
-        <div class="col-4 d-flex justify-content-end pr-5">
-            <h5>Student Name</h5>
+        <div class="col-12">
+            <ul class="d-flex align-items-center justify-content-center">
+                <li class="mx-3 nav-item">
+                    <a href="#" class="nav-link search-category student active" onclick="changeField(this)">Student Name</a>
+                    <hr/>
+                </li>
+                <li class="mx-3 nav-item">
+                    <a href="#" class="nav-link search-category title" onclick="changeField(this)">Submission Title</a>
+                    <hr/>
+                </li>
+            </ul>
         </div>
-        <div class="col-6 d-flex justify-content-start">
-            <h5> A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</h5>
+        <div class="col-7 d-flex align-items-center justify-content-center" id="searchIndex">
         </div>
     </div>
 </div>
 
 <div class="container">
     <div class="row" id="entriesRow">
-        <div class="card-transparent my-5">
-            <h3>
-                Sample Title
-            </h3>
-            <h5>
-                Sample Student, Sample Student, Sample Student
-            </h5>
-            <h5>
-                Sample Advisor, Sample Advisor, Sample Advisor - Sample Major
-            </h5>
-            <div class="row">
-                <div class="col-6 justify-content-center">
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/7yaP3xqb37k"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="col-6 justify-content-center">
-                    <iframe width="100%" height="315" src="https://onedrive.live.com/embed?cid=79B772C1E1351D3E&amp;resid=79B772C1E1351D3E%21269&amp;authkey=AK8SZ6a3G1PgniQ&amp;em=2&amp;wdAr=1.7777777777777777"
-                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="col-12 mt-2">
-                    For people with verbal or cognitive impairments, conversation can be difficult, limiting educational, social,
-                    and career opportunities. Livox is a pictogram-based alternative communication application that empowers
-                    people with a wide range of visual and motor impairments to engage in conversation. This project
-                    incorporated a ML and NLP-based classifier to detect specific questions and present the most relevant
-                    pictograms to users. Our newly introduced classifier reduced the time and effort required to communicate
-                    by 68.5% and 56.4%, respectively compared to the standard application. These results show that our work
-                    is a step forward towards making the world a more inclusive place for those who are nonverbal and have
-                    motor skill challenges.
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
-<div class="row w-100 py-3 align-items-center justify-content-center sticky-bottom" style="background-color: var(--red)">
+<div class="row w-100 py-3 align-items-center justify-content-center sticky-bottom"
+     style="background-color: var(--red)">
     <div class="col-12 text-center">
         <p class="footer-text bold">Arts and Sciences Week 2021</p>
     </div>
