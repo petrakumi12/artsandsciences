@@ -1,22 +1,37 @@
+body {
+    min-height: 100vh;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
 .bold {
     font-weight: bold;
     position: relative;
 }
 
 .blurry-borders {
-    box-shadow: 0 0 15px 20px #ffffff;
+    box-shadow: 0 0 5px 10px #ffffff;
 }
 
 .search-letters {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: var(--grey);
     /*font-weight: bold;*/
 }
 
 .search-category {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     background-color: rgba(0,0,0,0);
-    color: var(--grey)
+    color: var(--grey);
+    padding-bottom: 0;
+}
+
+.search-category ~ hr {
+    height: .15rem !important;
 }
 
 .indexLink{
@@ -29,13 +44,7 @@
     letter-spacing: 0.05rem;
 }
 
-ul {
-    list-style-type: none;
-}
 
-.search-category ~ hr {
-    height: .2rem !important;
-}
 
 
 .indexLink:hover {
@@ -49,5 +58,6 @@ ul {
     text-decoration: none;
     color: var(--light-grey);
 }
+
 
 

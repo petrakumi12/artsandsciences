@@ -1,6 +1,7 @@
 let programsList;
 
 window.onload = function() {
+    AOS.init()
     d3.csv("../data/program-list.csv").then(data => {
         programsList = data;
         generateProgramTable();

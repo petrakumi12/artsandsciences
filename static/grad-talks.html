@@ -6,12 +6,15 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!--    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">-->
+<!--    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>-->
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -29,9 +32,9 @@
 <!--<div class="row w-100 align-self-center justify-content-center">-->
 <!--</div>-->
 <div class="w-100 sticky-top" style="background-color: white">
-    <ul class="nav nav-white pt-3 mt-2 mx-5 justify-content-center">
-        <div class="col">
-            <img src="../images/wpi%20grey.png" style="height: 3rem">
+    <ul class="nav nav-white pt-2 mx-5 justify-content-center">
+        <div class="col d-flex align-items-center justify-content-left">
+            <img src="../images/wpi%20grey.png" style="height: 2rem">
         </div>
         <div class="row">
             <li class="nav-item">
@@ -48,12 +51,12 @@
             </li>
         </div>
     </ul>
-    <h1 class="text-center title-text sticky-top pt-5 pb-4 my-0">
+    <h1 class="title text-center title-text sticky-top py-3 my-0">
         Submission Abstracts
     </h1>
-    <div class="row w-100 no-gutters pb-4 blurry-borders align-items-center justify-content-center">
+    <div class="row w-100 no-gutters pb-3 blurry-borders align-items-center justify-content-center">
         <div class="col-12">
-            <ul class="d-flex align-items-center justify-content-center">
+            <ul class="d-flex align-items-center justify-content-center mb-2">
                 <li class="mx-3 nav-item">
                     <a href="#" class="nav-link search-category student active" onclick="changeField(this)">Student Name</a>
                     <hr/>
@@ -64,7 +67,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-7 d-flex align-items-center justify-content-center" id="searchIndex">
+        <div class="col-6 d-flex align-items-center justify-content-center" id="searchIndex">
         </div>
     </div>
 </div>
@@ -74,7 +77,7 @@
     </div>
 </div>
 
-<div class="row w-100 py-3 align-items-center justify-content-center sticky-bottom"
+<div class="w-100 py-3 align-items-center justify-content-center sticky-bottom"
      style="background-color: var(--red)">
     <div class="col-12 text-center">
         <p class="footer-text bold">Arts and Sciences Week 2021</p>

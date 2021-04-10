@@ -6,12 +6,17 @@ let curFilter = STUDENT;
 let processing;
 
 window.onload = function () {
-    AOS.init();
+    // AOS.init();
     d3.csv("../data/sample-data.csv").then(data => {
         sortData(data, 'Students');
         addSearchIndex();
         addTalksEntries();
         addScrollSpy();
+
+        $(".nav").fadeIn();
+        $(".title").delay(200).fadeIn();
+
+
         // fixHrefAnchor();
     })
 };
@@ -39,10 +44,7 @@ function addSearchIndex() {
     let parent = $("#searchIndex");
     startingLetters.forEach(([letter, ref], i) => {
         let span = $("<span/>", {
-            class: 'mx-5 search-letters',
-            'data-aos': 'zoom-in',
-            'data-aos-delay': i * 50,
-            'data-aos-anchor-placement': "bottom-bottom"
+            class: 'mx-4 search-letters'
         });
         let a = $("<a\>", {
             class: 'indexLink',
@@ -52,10 +54,7 @@ function addSearchIndex() {
         parent.append(span);
         span.append(a);
     });
-    let hr = $("<hr/>");
-    let div = $("<div/>", {
-        class: 'col-6'
-    });
+    $(".indexLink").delay(200).fadeIn()
 }
 
 function addTalksEntries() {
@@ -144,13 +143,13 @@ function changeField(el) {
         deleteTalksEntries();
         deleteIndex();
         if (el.text === STUDENT) {
-            $(".student").addClass('active')
+            $(".student").addClass('active');
             $(".title").removeClass('active');
             sortData(talksList, 'Students');
 
         }
         if (el.text === SUBMISSION) {
-            $(".title").addClass('active')
+            $(".title").addClass('active');
             $(".student").removeClass('active');
             sortData(talksList, 'Title');
         }
@@ -181,7 +180,6 @@ function addScrollSpy() {
                         let navPos = $("#searchIndex").position().top;
                         let margin = 250;
                         if (fromTop < navPos + margin) {
-                            console.log('here', ref);
                             $(".indexLink").removeClass('active');
                             theLink.addClass('active');
                         }
