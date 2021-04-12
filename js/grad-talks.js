@@ -69,11 +69,11 @@ function addTalksEntriesNoVideo() {
         })
             .text(entryTitle);
         let subtitleRow = $("<div/>", {
-            class: 'row my-4 justify-content-center align-items-top'
+            class: 'row mt-4 justify-content-center align-items-top'
         });
 
         let mediaRow = $("<div/>", {
-            class: 'row mt-4 mx-5'
+            class: 'row mx-5'
         });
         let subtitleCol = $("<div/>", {
             class: 'col-10 d-flex'
@@ -113,11 +113,11 @@ function addTalksEntriesNoVideo() {
         });
 
         let slidesCol = $("<div/>", {
-            class: 'col justify-content-center'
+            class: 'col-lg-6 mt-4 justify-content-center'
         });
         let slidesTag = entrySlides;
         let abstractCol = $("<div/>", {
-            class: 'col mt-0 px-0 px-3'
+            class: 'col-lg-6 mt-4 px-3'
         });
         let abstractText = $("<p/>", {
             class: 'px-0 mx-0',
