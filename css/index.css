@@ -6,8 +6,12 @@ body {
 }
 
 h1 {
+    font-size: 3em !important;
+}
+
+h1 {
     color: var(--light-grey);
-    font-family: 'Times New Roman',serif !important;
+    font-family: 'Times New Roman', serif !important;
     letter-spacing: 0.3rem;
     font-size: 3rem !important;
 }
@@ -24,6 +28,13 @@ h2 {
 
 a {
     letter-spacing: 0.1rem;
+}
+
+
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 4em !important;
+    }
 }
 
 /*font-family: 'Times New Roman',serif !important;*/
