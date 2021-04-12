@@ -11,7 +11,7 @@ window.onload = function () {
     d3.csv("../data/sample-data.csv").then(data => {
         sortData(data, 'Students');
         addSearchIndex();
-        addTalksEntriesWVideo();
+        addTalksEntriesNoVideo();
         addScrollSpy();
         addHrefListener();
         clickFirstIndex();
