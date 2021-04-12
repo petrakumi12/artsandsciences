@@ -1,23 +1,20 @@
-let talksList;
-let startingLetters;
+let talksList, startingLetters, processing, navPos;
+let margin = 250;
+let searchIndex, entriesRow;
 let STUDENT = "Student Name";
 let SUBMISSION = "Submission Title";
 let curFilter = STUDENT;
-let processing;
 
 window.onload = function () {
-    // AOS.init();
+    searchIndex = $("#searchIndex");
+    entriesRow = $("#entriesRow");
     d3.csv("../data/sample-data.csv").then(data => {
         sortData(data, 'Students');
         addSearchIndex();
-        addTalksEntries();
+        addTalksEntriesWVideo();
         addScrollSpy();
-
-        $(".nav").fadeIn();
-        $(".title").delay(200).fadeIn();
-
-
-        // fixHrefAnchor();
+        addHrefListener();
+        clickFirstIndex();
     })
 };
 
@@ -40,25 +37,119 @@ function sortData(data, attribute) {
 }
 
 function addSearchIndex() {
-
-    let parent = $("#searchIndex");
     startingLetters.forEach(([letter, ref], i) => {
-        let span = $("<span/>", {
-            class: 'mx-4 search-letters'
-        });
         let a = $("<a\>", {
-            class: 'indexLink',
+            class: 'indexLink px-4',
             href: '#' + ref,
             id: 'a_' + ref
         }).text(letter);
-        parent.append(span);
-        span.append(a);
+        searchIndex.append(a);
     });
-    $(".indexLink").delay(200).fadeIn()
+    $(".indexLink").delay(200).fadeIn();
+    navPos = searchIndex.position().top;
 }
 
-function addTalksEntries() {
-    // console.log(talksList);
+function addTalksEntriesNoVideo() {
+    talksList.forEach(item => {
+        let entryTitle = item['Title'];
+        let entryStudents = item['Students'];
+        let entryAdvisors = item['Advisors'];
+        let entryMajor = item['Major'];
+        let entrySlides = item['Slides'];
+        let entryAbstract = item['Abstract'];
+
+        let cardId = curFilter === STUDENT ? replaceSpaceUnderline(entryStudents) : replaceSpaceUnderline(entryTitle);
+
+        let card = $("<div/>", {
+            class: 'card-transparent my-5',
+            id: cardId
+        });
+        let title = $("<h3/>", {
+            class: 'text-center'
+        })
+            .text(entryTitle);
+        let subtitleRow = $("<div/>", {
+            class: 'row my-4 justify-content-center align-items-top'
+        });
+
+        let mediaRow = $("<div/>", {
+            class: 'row mt-4 mx-5'
+        });
+        let subtitleCol = $("<div/>", {
+            class: 'col-10 d-flex'
+        });
+        let studentCol = $("<div/>", {
+            class: 'col text-center'
+        });
+        let advisorCol = $("<div/>", {
+            class: 'col text-center'
+        });
+        let majorCol = $("<div/>", {
+            class: 'col text-center'
+        });
+
+        let students = $("<h5/>", {
+            class: 'text-center'
+        })
+            .text(entryStudents);
+        let studentIcon = $("<i/>", {
+            class: "fas fa-user-graduate my-2"
+        });
+
+        let advisor = $("<h5/>", {
+            class: 'text-center'
+        })
+            .text(entryAdvisors);
+        let advisorIcon = $("<i/>", {
+            class: "fas fa-user-tie my-2"
+        });
+
+        let major = $("<h5/>", {
+            class: 'text-center'
+        })
+            .text(entryMajor);
+        let majorIcon = $("<i/>", {
+            class: "fas fa-building my-2"
+        });
+
+        let slidesCol = $("<div/>", {
+            class: 'col justify-content-center'
+        });
+        let slidesTag = entrySlides;
+        let abstractCol = $("<div/>", {
+            class: 'col mt-0 px-0 px-3'
+        });
+        let abstractText = $("<p/>", {
+            class: 'px-0 mx-0',
+            style: 'font-size: .9rem;'
+        })
+            .text(entryAbstract);
+
+        entriesRow.append(card);
+        card.append(title);
+        card.append(subtitleRow);
+        subtitleRow.append(subtitleCol);
+
+        subtitleCol.append(studentCol);
+        subtitleCol.append(advisorCol);
+        subtitleCol.append(majorCol);
+        studentCol.append(studentIcon);
+        studentCol.append(students);
+        advisorCol.append(advisorIcon);
+        advisorCol.append(advisor);
+        majorCol.append(majorIcon);
+        majorCol.append(major);
+
+        card.append(mediaRow);
+        mediaRow.append(slidesCol);
+        mediaRow.append(abstractCol);
+        slidesCol.append(slidesTag);
+        abstractCol.append(abstractText);
+    })
+
+}
+
+function addTalksEntriesWVideo() {
     talksList.forEach(item => {
         let entryTitle = item['Title'];
         let entryStudents = item['Students'];
@@ -68,66 +159,112 @@ function addTalksEntries() {
         let entrySlides = item['Slides'];
         let entryAbstract = item['Abstract'];
 
-        let id = curFilter === STUDENT ? replaceSpaceUnderline(entryStudents) : replaceSpaceUnderline(entryTitle);
-        let entriesRow = $("#entriesRow");
+        let cardId = curFilter === STUDENT ? replaceSpaceUnderline(entryStudents) : replaceSpaceUnderline(entryTitle);
 
         let card = $("<div/>", {
             class: 'card-transparent my-5',
-            id: id
+            id: cardId
         });
-        let title = $("<h3/>").text(entryTitle);
-        let students = $("<h5/>").text(entryStudents);
-        let advisorMajor = $("<h5/>").text(entryAdvisors + " - " + entryMajor);
+        let title = $("<h3/>", {
+            class: 'text-center'
+        }).text(entryTitle);
 
         let mediaRow = $("<div/>", {
-            class: 'row'
+            class: 'row mt-4 mx-5'
         });
         let videoCol = $("<div/>", {
             class: 'col-6 justify-content-center'
         });
-        // let videoTag = $("<iframe/>", {
-        //     'width': '100%',
-        //     'height': '315',
-        //     'src': extractMediaLink(entryVideo, 'video')
-        //     'allowfullscreen': true
-        // });
-        let videoTag = $("<img/>", {
-            src: '../images/coming soon.png',
-            // 'class': 'img-fluid',
-            style: 'object-fit: cover; height: 350px'
+        let videoTag = $("<iframe/>", {
+            'width': '100%',
+            'height': '315',
+            'src': extractMediaLink(entryVideo, 'video'),
+            'allowfullscreen': true
         });
+
+        let subtitleRow = $("<div/>", {
+            class: 'row my-4 justify-content-center align-items-top'
+        });
+        let subtitleCol = $("<div/>", {
+            class: 'col-10 d-flex'
+        });
+        let studentCol = $("<div/>", {
+            class: 'col text-center'
+        });
+        let advisorCol = $("<div/>", {
+            class: 'col text-center'
+        });
+        let majorCol = $("<div/>", {
+            class: 'col text-center'
+        });
+
+        let students = $("<h5/>", {
+            class: 'text-center'
+        }).text(entryStudents);
+        let studentIcon = $("<i/>", {
+            class: "fas fa-user-graduate my-2"
+        });
+
+        let advisor = $("<h5/>", {
+            class: 'text-center'
+        }).text(entryAdvisors);
+        let advisorIcon = $("<i/>", {
+            class: "fas fa-user-tie my-2"
+        });
+
+        let major = $("<h5/>", {
+            class: 'text-center'
+        }).text(entryMajor);
+        let majorIcon = $("<i/>", {
+            class: "fas fa-building my-2"
+        });
+
         let slidesCol = $("<div/>", {
-            class: 'col-6 justify-content-center'
+            class: 'col justify-content-center'
         });
         let slidesTag = entrySlides;
-        let abstractRow = $("<div/>", {
-            class: 'col-12 mt-2 px-0'
+        let abstractCol = $("<div/>", {
+            class: 'col mt-4 px-5'
         });
         let abstractText = $("<p/>", {
-            class: 'px-0 mx-0'
+            class: 'px-3 mx-0',
+            style: 'font-size: .9rem;'
         }).text(entryAbstract);
 
         entriesRow.append(card);
         card.append(title);
-        card.append(students);
-        card.append(advisorMajor);
+        card.append(subtitleRow);
+        subtitleRow.append(subtitleCol);
+
+        subtitleCol.append(studentCol);
+        subtitleCol.append(advisorCol);
+        subtitleCol.append(majorCol);
+
+        studentCol.append(studentIcon);
+        studentCol.append(students);
+
+        advisorCol.append(advisorIcon);
+        advisorCol.append(advisor);
+
+        majorCol.append(majorIcon);
+        majorCol.append(major);
         card.append(mediaRow);
-        mediaRow.append(videoCol);
-        videoCol.append(videoTag);
         mediaRow.append(slidesCol);
         slidesCol.append(slidesTag);
-        card.append(abstractRow);
-        abstractRow.append(abstractText);
-    })
+        mediaRow.append(videoCol);
+        videoCol.append(videoTag);
 
+        card.append(abstractCol);
+        abstractCol.append(abstractText);
+    })
 }
 
 function deleteTalksEntries() {
-    $("#entriesRow").empty();
+    entriesRow.empty();
 }
 
 function deleteIndex() {
-    $("#searchIndex").empty();
+    searchIndex.empty();
 }
 
 function extractMediaLink(linkText, type) {
@@ -156,6 +293,7 @@ function changeField(el) {
         curFilter = el.text;
         addSearchIndex();
         addTalksEntries();
+        clickFirstIndex();
     }
 }
 
@@ -177,8 +315,6 @@ function addScrollSpy() {
                     let pos = $(cardref).offset();
                     if (pos && !theLink.hasClass('active')) {
                         let fromTop = pos.top - $(window).scrollTop();
-                        let navPos = $("#searchIndex").position().top;
-                        let margin = 250;
                         if (fromTop < navPos + margin) {
                             $(".indexLink").removeClass('active');
                             theLink.addClass('active');
@@ -190,10 +326,28 @@ function addScrollSpy() {
     });
 }
 
-// function fixHrefAnchor() {
-//     $(".indexLink").click((ev, item) => {
-//         let url = location.href;
-//         location.href = item.href();
-//         history.replaceState(null,null, url);
-//     })
-// }
+function addHrefListener() {
+    $(".nav").fadeIn();
+    $(".title").delay(200).fadeIn();
+
+    $(document).on("click", "#searchIndex", ev => {
+        ev.preventDefault();
+        let el = ev.target || ev.srcElement;
+        if (el instanceof HTMLAnchorElement) {
+            window.location.href = el.getAttribute('href');
+            let htmlTag = $("html");
+            let scrollPos = htmlTag.scrollTop();
+            console.log('scrollpos', scrollPos);
+            htmlTag.animate({
+                scrollTop: scrollPos - (navPos) - 50
+            });
+        }
+    });
+}
+
+function clickFirstIndex() {
+    console.log('called', searchIndex.children().eq(0))
+    searchIndex.children()[0].click();
+}
+
+

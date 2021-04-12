@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graduate Talks</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">-->
+    <!--    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+
+    <script type="text/javascript" src="../js/grad-talks-2.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/grad-talks.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<!--<div class="row w-100 align-self-center justify-content-center">-->
+<!--</div>-->
+<div class="sticky-top" style="background-color: white">
+    <ul class="nav nav-white pt-2 mx-5 justify-content-center">
+        <div class="col d-flex align-items-center justify-content-left">
+            <img src="../images/wpi%20grey.png" style="height: 2rem">
+        </div>
+        <div class="row">
+            <li class="nav-item">
+                <a class="nav-link nav-item-md" href="../index.html">HOME</a>
+                <hr/>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-item-md" href="schedule.html">SCHEDULE</a>
+                <hr/>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-item-md active" href="#">ABSTRACTS</a>
+                <hr/>
+            </li>
+        </div>
+    </ul>
+    <h1 class="title text-center title-text sticky-top py-3 my-0">
+        Submission Abstracts
+    </h1>
+    <div class="row w-100 no-gutters pb-3 blurry-borders align-items-center justify-content-center">
+        <div class="col-12">
+            <ul class="d-flex align-items-center justify-content-center mb-2">
+                <li class="mx-3 nav-item">
+                    <a href="#" class="nav-link search-category-selector student active" onclick="changeField(this)">Student Name</a>
+                    <hr/>
+                </li>
+                <li class="mx-3 nav-item">
+                    <a href="#" class="nav-link search-category-selector title" onclick="changeField(this)">Submission Title</a>
+                    <hr/>
+                </li>
+            </ul>
+        </div>
+        <div class="col-6 d-flex align-items-center justify-content-center" id="searchIndex">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row" id="entriesRow">
+    </div>
+</div>
+
+<div class="w-100 py-3 align-items-center justify-content-center sticky-bottom"
+     style="background-color: var(--red)">
+    <div class="col-12 text-center">
+        <p class="footer-text bold">Arts and Sciences Week 2021</p>
+    </div>
+    <div class="col-12 text-center">
+        <p class="footer-text">Worcester Polytechnic Institute | School of Arts and Sciences</p>
+    </div>
+</div>
+</body>
+</html>
+
+<!--
+<i class="fas fa-user-graduate"></i>
+<i class="fas fa-user-tie"></i>
+<i class="fas fa-building"></i>
+-->
