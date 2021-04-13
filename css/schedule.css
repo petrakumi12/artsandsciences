@@ -1,8 +1,34 @@
 
-body {
-    height: 100vh;
-}
+/*body {*/
+/*    height: 100vh;*/
+/*}*/
 
 /*.container {*/
 /*    font-size: 120%;*/
 /*}*/
+
+.time-col {
+    white-space: nowrap;
+}
+
+
+th {
+    position: sticky;
+    top: 10rem;
+    background-color: white;
+    color: var(--grey);
+}
+
+td {
+    font-weight: lighter;
+}
+
+.tr-link {
+    color: var(--grey);
+    font-weight: normal;
+}
+
+.tr-link:hover {
+    color: var(--dark-grey);
+
+}

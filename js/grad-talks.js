@@ -1,22 +1,32 @@
 let talksList, startingLetters, processing, navPos;
-let margin = 250;
+let margin = 50 / window.innerWidth;
 let searchIndex, entriesRow;
 let STUDENT = "Student Name";
 let SUBMISSION = "Submission Title";
 let curFilter = STUDENT;
+let isSmall;
+let smallScreen = 576;
+
 
 window.onload = function () {
     searchIndex = $("#searchIndex");
     entriesRow = $("#entriesRow");
+    isSmall = checkIsSmall();
     d3.csv("../data/sample-data.csv").then(data => {
         sortData(data, 'Students');
         addSearchIndex();
         addTalksEntriesNoVideo();
-        addScrollSpy();
         addHrefListener();
-        clickFirstIndex();
+        addScrollSpy();
+        // clickFirstIndex();
+        goToHref();
+        generateSearchOnResize();
     })
 };
+
+function checkIsSmall() {
+    return window.innerWidth < smallScreen
+}
 
 //Submission Code,Presentation Number,Contact Email,Corresponding Author,Students,Advisors,Major,Title,Video,Abstract,Slides
 function sortCondition(a, b) {
@@ -32,19 +42,44 @@ function sortData(data, attribute) {
     startingLetters = [];
     talksList = data.sort((a, b) => sortCondition(a[attribute], b[attribute]));
     talksList.forEach(el =>
-        startingLetters = addIfNotExist(startingLetters, el[attribute][0], replaceSpaceUnderline(el[attribute])));
+        startingLetters = addIfNotExist(startingLetters, el[attribute][0], replaceSpecial(el[attribute])));
     startingLetters = startingLetters.sort((a, b) => sortCondition(a[0], b[0]));
 }
 
 function addSearchIndex() {
-    startingLetters.forEach(([letter, ref], i) => {
-        let a = $("<a\>", {
-            class: 'indexLink px-4',
-            href: '#' + ref,
-            id: 'a_' + ref
-        }).text(letter);
-        searchIndex.append(a);
-    });
+
+    if (window.innerWidth < smallScreen) {
+        let containerDiv = $("<div/>", {
+            class: 'input-group d-flex justify-content-center'
+        });
+        let select = $("<select/>", {
+            class: 'custom-select text-center',
+            id: 'selectIndexTag',
+            'data-width': '20%'
+        })
+        startingLetters.forEach(([letter, ref], i) => {
+            let option = $("<option/>", {
+                class: 'indexLink',
+                value: '#' + ref,
+                href: '#' + ref,
+                id: 'a_' + ref
+            }).text(letter);
+            select.append(option)
+        });
+        searchIndex.append(containerDiv);
+        containerDiv.append(select);
+        addOnSelectListener();
+    } else {
+        startingLetters.forEach(([letter, ref], i) => {
+            let a = $("<a\>", {
+                class: 'indexLink px-4',
+                href: '#' + ref,
+                id: 'a_' + ref
+            }).text(letter);
+            searchIndex.append(a);
+        });
+    }
+
     $(".indexLink").delay(200).fadeIn();
     navPos = searchIndex.position().top;
 }
@@ -58,66 +93,55 @@ function addTalksEntriesNoVideo() {
         let entrySlides = item['Slides'];
         let entryAbstract = item['Abstract'];
 
-        let cardId = curFilter === STUDENT ? replaceSpaceUnderline(entryStudents) : replaceSpaceUnderline(entryTitle);
+        let cardId = curFilter === STUDENT ? replaceSpecial(entryStudents) : replaceSpecial(entryTitle);
 
         let card = $("<div/>", {
             class: 'card-transparent my-5',
             id: cardId
         });
         let title = $("<h3/>", {
-            class: 'text-center'
-        })
-            .text(entryTitle);
-        let subtitleRow = $("<div/>", {
-            class: 'row mt-4 justify-content-center align-items-top'
-        });
+            class: 'text-center px-3'
+        }).text(entryTitle);
 
-        let mediaRow = $("<div/>", {
-            class: 'row mx-5'
+        let subtitleRow = $("<div/>", {
+            class: 'row w-100 no-gutters mt-4 justify-content-center align-items-top'
         });
         let subtitleCol = $("<div/>", {
-            class: 'col-10 d-flex'
-        });
-        let studentCol = $("<div/>", {
-            class: 'col text-center'
-        });
-        let advisorCol = $("<div/>", {
-            class: 'col text-center'
-        });
-        let majorCol = $("<div/>", {
-            class: 'col text-center'
+            class: 'row w-100 no-gutters px-5 justify-content-around'
         });
 
-        let students = $("<h5/>", {
-            class: 'text-center'
-        })
-            .text(entryStudents);
+        let studentCol = $("<div/>", {
+            class: 'col-xs-4 px-2 text-center icon-text-col'
+        });
+        let advisorCol = $("<div/>", {
+            class: 'col-xs-4 px-2 text-center icon-text-col'
+        });
+        let majorCol = $("<div/>", {
+            class: 'col-xs-4 px-2 text-center icon-text-col'
+        });
+        let students = $("<h5/>").text(entryStudents);
         let studentIcon = $("<i/>", {
             class: "fas fa-user-graduate my-2"
         });
-
-        let advisor = $("<h5/>", {
-            class: 'text-center'
-        })
-            .text(entryAdvisors);
+        let advisor = $("<h5/>").html(entryAdvisors.replace(',', ', <br/>'));
         let advisorIcon = $("<i/>", {
             class: "fas fa-user-tie my-2"
         });
-
-        let major = $("<h5/>", {
-            class: 'text-center'
-        })
-            .text(entryMajor);
+        let major = $("<h5/>").text(entryMajor);
         let majorIcon = $("<i/>", {
             class: "fas fa-building my-2"
         });
-
+        let containerRow = $("<div/>", {
+            class: 'row w-100 no-gutters px-5 media-container'
+        });
         let slidesCol = $("<div/>", {
-            class: 'col-lg-6 mt-4 justify-content-center'
+            class: 'col-lg-6 mt-4  px-3 justify-content-center'
         });
         let slidesTag = entrySlides;
+        let parsedSlidesTag = $($.parseHTML(entrySlides)).width('100%').height('20rem');
+
         let abstractCol = $("<div/>", {
-            class: 'col-lg-6 mt-4 px-3'
+            class: 'col-lg-6 mt-4'
         });
         let abstractText = $("<p/>", {
             class: 'px-0 mx-0',
@@ -140,10 +164,10 @@ function addTalksEntriesNoVideo() {
         majorCol.append(majorIcon);
         majorCol.append(major);
 
-        card.append(mediaRow);
-        mediaRow.append(slidesCol);
-        mediaRow.append(abstractCol);
-        slidesCol.append(slidesTag);
+        card.append(containerRow);
+        containerRow.append(slidesCol);
+        containerRow.append(abstractCol);
+        slidesCol.append(parsedSlidesTag);
         abstractCol.append(abstractText);
     })
 
@@ -159,7 +183,7 @@ function addTalksEntriesWVideo() {
         let entrySlides = item['Slides'];
         let entryAbstract = item['Abstract'];
 
-        let cardId = curFilter === STUDENT ? replaceSpaceUnderline(entryStudents) : replaceSpaceUnderline(entryTitle);
+        let cardId = curFilter === STUDENT ? replaceSpecial(entryStudents) : replaceSpecial(entryTitle);
 
         let card = $("<div/>", {
             class: 'card-transparent my-5',
@@ -259,6 +283,21 @@ function addTalksEntriesWVideo() {
     })
 }
 
+function goToHref(url = '') {
+    console.log('href', url);
+    url === '' ? window.location.href.split('#')[1] + '#' : url;
+    if (url !== '') {
+        let hrefPos = $(url).position().top;
+        console.log('pos', hrefPos);
+        $("html").animate({
+            scrollTop: hrefPos - navPos - margin
+        }, 600);
+    } else {
+        clickFirstIndex();
+    }
+
+}
+
 function deleteTalksEntries() {
     entriesRow.empty();
 }
@@ -292,12 +331,12 @@ function changeField(el) {
         }
         curFilter = el.text;
         addSearchIndex();
-        addTalksEntries();
+        addTalksEntriesNoVideo();
         clickFirstIndex();
     }
 }
 
-function replaceSpaceUnderline(word) {
+function replaceSpecial(word) {
     word = word.replaceAll(/[^\w\s]/gi, '');
     return word.replaceAll(' ', '_')
 }
@@ -305,7 +344,7 @@ function replaceSpaceUnderline(word) {
 function addScrollSpy() {
     $(window).scroll(ev => {
         startingLetters
-            .map(el => replaceSpaceUnderline(el[1]))
+            .map(el => replaceSpecial(el[1]))
             .forEach(ref => {
                 if (!processing) {
                     processing = true;
@@ -313,11 +352,16 @@ function addScrollSpy() {
                     let cardref = "#" + ref;
                     let theLink = $(aref);
                     let pos = $(cardref).offset();
-                    if (pos && !theLink.hasClass('active')) {
+                    if (pos && !theLink.hasClass('active') && !theLink.hasClass('selected')) {
                         let fromTop = pos.top - $(window).scrollTop();
-                        if (fromTop < navPos + margin) {
-                            $(".indexLink").removeClass('active');
-                            theLink.addClass('active');
+                        if (fromTop <= navPos + 300) {
+                            if (window.innerWidth < smallScreen) {
+                                $(".indexLink").removeClass('selected');
+                                theLink.addClass('selected');
+                            } else {
+                                $(".indexLink").removeClass('active');
+                                theLink.addClass('active');
+                            }
                         }
                     }
                     processing = false;
@@ -327,27 +371,41 @@ function addScrollSpy() {
 }
 
 function addHrefListener() {
-    $(".nav").fadeIn();
-    $(".title").delay(200).fadeIn();
-
     $(document).on("click", "#searchIndex", ev => {
-        ev.preventDefault();
+        // ev.preventDefault();
         let el = ev.target || ev.srcElement;
-        if (el instanceof HTMLAnchorElement) {
-            window.location.href = el.getAttribute('href');
-            let htmlTag = $("html");
-            let scrollPos = htmlTag.scrollTop();
-            console.log('scrollpos', scrollPos);
-            htmlTag.animate({
-                scrollTop: scrollPos - (navPos) - 50
-            });
+        if (el instanceof HTMLAnchorElement && el.id !== 'a_') {
+            let hrefPos = $(el.getAttribute('href')).position().top;
+            $("html").animate({
+                scrollTop: hrefPos - navPos - margin
+            }, 600);
         }
     });
 }
 
+function generateSearchOnResize() {
+    $(window).resize(ev => {
+        let newCheck = checkIsSmall();
+        console.log('resized: ', isSmall, newCheck);
+        if (newCheck !== isSmall) {
+            isSmall = newCheck;
+            deleteIndex();
+            addSearchIndex();
+        }
+    })
+}
+
+function addOnSelectListener() {
+    $("select").click(function () {
+        let child = $("select option:selected");
+        goToHref(child.attr('href'));
+    });
+}
+
 function clickFirstIndex() {
-    console.log('called', searchIndex.children().eq(0))
     searchIndex.children()[0].click();
 }
+
+
 
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
     <meta charset="UTF-8">
     <title>Programs</title>
 
@@ -26,36 +27,50 @@
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-<div class="w-100 sticky-top" style="background-color: white">
-    <ul class="nav nav-white pt-2 mx-5 justify-content-center" data-aos="fade-down">
-        <div class="col d-flex align-items-center justify-content-left">
-            <img src="../images/wpi%20grey.png" style="height: 2rem">
+<div class="sticky-top">
+    <nav class="navbar navbar-light navbar-expand-lg justify-content-around w-100"
+         style="background-color: white;">
+    <span class="navbar-brand m-0 px-3 pt-3">
+        <img src="../images/wpi%20grey.png" style="max-height: 2rem; max-width: 100%;">
+    </span>
+        <div class="row nav-container justify-content-end pr-5 pt-3">
+            <button class="navbar-toggler btn btn-outline-light" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon text-center"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto nav-white" data-aos="fade-down">
+                    <li class="nav-item">
+                        <a class="nav-link nav-item-md text-right" href="../index.html">HOME</a>
+                        <hr/>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-item-md text-right active" href="#">SCHEDULE</a>
+                        <hr/>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-item-md text-right" href="grad-talks.html">ABSTRACTS</a>
+                        <hr/>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <li class="nav-item">
-            <a class="nav-link nav-item-md" href="../index.html">HOME</a>
-            <hr/>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link nav-item-md active" href="#">SCHEDULE</a>
-            <hr/>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link nav-item-md" href="grad-talks.html">ABSTRACTS</a>
-            <hr/>
-        </li>
-    </ul>
-    <h1 class="text-center title-text sticky-top pt-3 pb-5 my-0" data-aos="fade-up">
+    </nav>
+
+    <h1 class="text-center title-text mt-0 mb-5 py-4 title-container" data-aos="fade-up">
         Presentation Schedule
     </h1>
 </div>
 <div class="container" data-aos="fade-up">
-    <div class="row">
+    <div class="row w-100 no-gutters">
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Time</th>
-                <th scope="col">Event Name</th>
-                <th scope="col">Event Type</th>
+                <th scope="col" class="time-col" style="">Time</th>
+                <th scope="col sticky-top">Presentation Title</th>
+                <th scope="col sticky-top">Presenter</th>
+                <th scope="col sticky-top">Department</th>
             </tr>
             </thead>
             <tbody id="tableBody">
@@ -63,7 +78,8 @@
         </table>
     </div>
 </div>
-<div class="w-100 py-3 align-items-center justify-content-center fixed-bottom"
+
+<div class="w-100 py-3 align-items-center justify-content-center sticky-bottom"
      style="background-color: var(--red)">
     <div class="col-12 text-center">
         <p class="footer-text bold">Arts and Sciences Week 2021</p>
