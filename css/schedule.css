@@ -32,3 +32,9 @@ td {
     color: var(--dark-grey);
 
 }
+
+@media only screen and (max-width: 768px) {
+    .container {
+        font-size: 80%;
+    }
+}
