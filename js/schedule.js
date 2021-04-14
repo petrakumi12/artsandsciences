@@ -2,7 +2,7 @@ let programsList;
 
 window.onload = function () {
     AOS.init();
-    d3.csv("../data/sample-timetable.csv").then(data => {
+    d3.csv("../data/timeline.csv").then(data => {
         programsList = data;
         generateProgramTable();
     })

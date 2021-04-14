@@ -12,7 +12,7 @@ window.onload = function () {
     searchIndex = $("#searchIndex");
     entriesRow = $("#entriesRow");
     isSmall = checkIsSmall();
-    d3.csv("../data/sample-data.csv").then(data => {
+    d3.csv("../data/submissions.csv").then(data => {
         sortData(data, 'Students');
         addSearchIndex();
         addTalksEntriesNoVideo();
@@ -123,7 +123,7 @@ function addTalksEntriesNoVideo() {
         let studentIcon = $("<i/>", {
             class: "fas fa-user-graduate my-2"
         });
-        let advisor = $("<h5/>").html(entryAdvisors.replace(',', ', <br/>'));
+        let advisor = $("<h5/>").html(entryAdvisors);
         let advisorIcon = $("<i/>", {
             class: "fas fa-user-tie my-2"
         });
@@ -138,7 +138,13 @@ function addTalksEntriesNoVideo() {
             class: 'col-lg-6 mt-4  px-3 justify-content-center'
         });
         let slidesTag = entrySlides;
-        let parsedSlidesTag = $($.parseHTML(entrySlides)).width('100%').height('20rem');
+        let parsedSlidesTag = $($.parseHTML(entrySlides));
+            // .width('100%')
+            // .height('20rem');
+            // .removeAttr('width');
+            // parsedSlidesTag.removeAttr('height');
+                parsedSlidesTag.width('100%')
+        parsedSlidesTag.css('min-height', '100%')
 
         let abstractCol = $("<div/>", {
             class: 'col-lg-6 mt-4'
@@ -386,7 +392,6 @@ function addHrefListener() {
 function generateSearchOnResize() {
     $(window).resize(ev => {
         let newCheck = checkIsSmall();
-        console.log('resized: ', isSmall, newCheck);
         if (newCheck !== isSmall) {
             isSmall = newCheck;
             deleteIndex();
