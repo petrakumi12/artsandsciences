@@ -21,6 +21,7 @@ window.onload = function () {
         // clickFirstIndex();
         goToHref();
         generateSearchOnResize();
+        searchIndex.append($('<h1/>').text(window.innerWidth))
     })
 };
 
