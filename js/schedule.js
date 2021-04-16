@@ -9,7 +9,6 @@ window.onload = function () {
 };
 
 function generateProgramTable() {
-    console.log(programsList);
     for (let item of programsList) {
         let titleLink = $("<a/>", {
                 href: 'grad-talks.html#' + replaceSpecial(item['Presenter']),
