@@ -141,7 +141,7 @@ function addTalksEntriesNoVideo() {
         let slidesCol;
         let abstractCol;
 
-        if (entryAbstract !== 'TBD'){
+        if (entryAbstract !== 'TBD') {
             slidesCol = $("<div/>", {
                 class: 'col-lg-6 mt-4 px-3 justify-content-center',
                 style: 'padding: 0; overflow: hidden;'
@@ -150,8 +150,7 @@ function addTalksEntriesNoVideo() {
             abstractCol = $("<div/>", {
                 class: 'col-lg-6 mt-4'
             });
-        }
-        else {
+        } else {
             slidesCol = $("<div/>", {
                 class: 'col-lg-12 mt-4 px-3 justify-content-center',
                 style: 'padding: 0; overflow: hidden;'
@@ -298,6 +297,9 @@ function addTalksEntriesWVideo() {
 
 function goToHref(url = '') {
     url = url === '' ? '#top' : url;
+    if (window.location.href.includes('#')) {
+        url = '#' + window.location.href.split('#')[1]
+    }
     if (url !== '') {
         let hrefPos = $(url).position().top;
         $("html").animate({
