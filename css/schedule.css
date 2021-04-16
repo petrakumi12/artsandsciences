@@ -1,16 +1,6 @@
-
-/*body {*/
-/*    height: 100vh;*/
-/*}*/
-
-/*.container {*/
-/*    font-size: 120%;*/
-/*}*/
-
 .time-col {
     white-space: nowrap;
 }
-
 
 th {
     position: sticky;
@@ -36,5 +26,19 @@ td {
 @media only screen and (max-width: 768px) {
     .container {
         font-size: 80%;
+    }
+
+    th {
+        top: 10em;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .container {
+        font-size: 60%;
+    }
+
+    th {
+        top: 15em;
     }
 }

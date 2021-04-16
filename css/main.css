@@ -2,7 +2,7 @@
 
 :root {
     --home-bg-color: #AC2B37;
-    --grey: #707070;
+    --grey: #555f65;
     --dark-grey: #515151;
     --med-grey: #99a0a7;
     --light-grey: #b9c2ca;
@@ -115,6 +115,9 @@ button.navbar-toggler:focus {
     padding-bottom: 0.4rem;
 }
 
+a:hover {
+    color: white;
+}
 
 .nav-item > .nav-link:hover ~ hr {
     transform: translate(3em, 0);
@@ -165,6 +168,7 @@ button.navbar-toggler:focus {
 .card-transparent {
     outline: rgba(0, 0, 0, 0);
     box-shadow: rgba(0, 0, 0, 0);
+    width: 100%;
 }
 
 .footer-text {
@@ -205,17 +209,21 @@ button.navbar-toggler:focus {
 }
 
 @media only screen and (max-width: 576px) {
+    h1 {
+        font-size: 1.9rem; !important;
+    }
     h3 {
-        font-size: 1.7rem !important;
+        font-size: 1.5rem !important;
     }
     h5 {
-        font-size: .9rem !important;
+        font-size: .8rem !important;
     }
     p {
-        font-size: 1rem !important;
+        font-size: .9rem !important;
     }
     .footer-text {
         font-size: 0.6rem !important;
+        color: var(--light-grey) !important;
     }
     .navbar-light .navbar-toggler-icon {
         padding: 0.5rem !important;

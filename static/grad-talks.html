@@ -36,14 +36,16 @@
 <!--<div class="row w-100 align-self-center justify-content-center">-->
 <!--</div>-->
 <div class="sticky-top">
-<!--    start navbar -->
+    <!--    start navbar -->
     <nav class="navbar navbar-light navbar-expand-lg justify-content-around w-100"
          style="background-color: white;">
     <span class="navbar-brand m-0 px-3 pt-3">
         <img src="../images/wpi%20grey.png" style="max-height: 2rem; max-width: 100%;">
     </span>
         <div class="row nav-container justify-content-end pr-5 pt-3">
-            <button class="navbar-toggler btn btn-sm btn-outline-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler btn btn-sm btn-outline-light" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon text-center"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -64,48 +66,68 @@
             </div>
         </div>
     </nav>
-<!--    end navbar -->
+    <!--    end navbar -->
 
     <div class="w-100 no-gutters title-container">
-        <h1 class="text-center title-text my-0 py-3  title-container">
+        <h1 class="text-center title-text my-0 py-3">
             Submission Abstracts
         </h1>
         <div class="row w-100 no-gutters pb-3 blurry-borders align-items-center justify-content-center">
-            <div class="col-12 mb-3">
+
+            <div class="col-xl-5 mb-3" id="indexCategoriesRow">
                 <ul class="row no-gutters px-3 d-flex align-items-center justify-content-center">
-                    <div class="col-xs-3 d-flex justify-content-center">
+
+                    <div class="col-6 d-flex justify-content-center">
                         <li class="nav-item">
-                            <a href="#" class="nav-link search-category-selector student active" onclick="changeField(this)">Student Name</a>
+                            <a href="#" class="nav-link search-category-selector student active"
+                               onclick="changeField(this)">Student Name</a>
                             <hr/>
                         </li>
                     </div>
-                    <div class="col-xs-3 d-flex justify-content-center">
+                    <div class="col-6 d-flex justify-content-center">
                         <li class="nav-item">
-                            <a href="#" class="nav-link search-category-selector title" onclick="changeField(this)">Submission Title</a>
+                            <a href="#" class="nav-link search-category-selector title" onclick="changeField(this)">
+                                Submission Title
+                            </a>
                             <hr/>
                         </li>
                     </div>
 
                 </ul>
             </div>
-            <div class="col-6 d-flex align-items-center justify-content-center" id="searchIndex">
+
+            <div class="col-xl-12 d-flex align-items-center justify-content-center" id="searchIndex">
             </div>
         </div>
     </div>
 
 </div>
-<div class="container"  data-aos="fade-up">
-    <div class="row" id="entriesRow">
+<div class="container" data-aos="fade-up">
+    <div class="row" id="top">
     </div>
 </div>
 
-<div class="w-100 py-3 align-items-center justify-content-center sticky-bottom"
+<div class="row w-100 py-3 align-items-center justify-content-center sticky-bottom"
      style="background-color: var(--red)">
-    <div class="col-12 text-center">
-        <p class="footer-text bold">Arts and Sciences Week 2021</p>
+    <div class="col-12 pb-3 text-center">
+        <p class="footer-text">
+            <a class="footer-text" href="https://www.wpi.edu/news/calendar/events/2021-spring-science-week"
+               style="text-decoration: underline">
+                Arts and Sciences Spring Science Week 2021
+            </a> |
+            <a class="footer-text" href="https://www.wpi.edu/" style="text-decoration: underline">
+                Worcester Polytechnic Institute
+            </a>
+        </p>
     </div>
-    <div class="col-12 text-center">
-        <p class="footer-text">Worcester Polytechnic Institute | School of Arts and Sciences</p>
+<!--    <hr style="width: 40%; height: .02rem;"/>-->
+    <div class="row py-3 w-100 no-gutters justify-content-center">
+        <div class="col-lg-1 text-left">
+            <p class="footer-text"><b>Organizers</b><br/>Geri Dimas<br/>Dayna Mercante<br/>Ally Salvino</p>
+        </div>
+        <div class="col-lg-1 text-left">
+            <p class="footer-text"><b>Web</b><br/>Petra Kumi</p>
+        </div>
     </div>
 </div>
 </body>

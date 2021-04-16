@@ -10,7 +10,7 @@ let smallScreen = 576;
 
 window.onload = function () {
     searchIndex = $("#searchIndex");
-    entriesRow = $("#entriesRow");
+    entriesRow = $("#top");
     isSmall = checkIsSmall();
     d3.csv("../data/submissions.csv").then(data => {
         sortData(data, 'Students');
@@ -18,10 +18,8 @@ window.onload = function () {
         addTalksEntriesNoVideo();
         addHrefListener();
         addScrollSpy();
-        // clickFirstIndex();
         goToHref();
         generateSearchOnResize();
-        // searchIndex.append($('<h1/>').text(window.innerWidth))
     })
 };
 
@@ -48,7 +46,6 @@ function sortData(data, attribute) {
 }
 
 function addSearchIndex() {
-
     if (window.innerWidth < smallScreen) {
         let containerDiv = $("<div/>", {
             class: 'input-group d-flex justify-content-center'
@@ -57,7 +54,7 @@ function addSearchIndex() {
             class: 'custom-select text-center',
             id: 'selectIndexTag',
             'data-width': '20%'
-        })
+        });
         startingLetters.forEach(([letter, ref], i) => {
             let option = $("<option/>", {
                 class: 'indexLink',
@@ -135,26 +132,35 @@ function addTalksEntriesNoVideo() {
         let containerRow = $("<div/>", {
             class: 'row w-100 no-gutters px-5 media-container'
         });
-        let slidesCol = $("<div/>", {
-            class: 'col-lg-6 mt-4  px-3 justify-content-center'
-        });
-        let slidesTag = entrySlides;
-        let parsedSlidesTag = $($.parseHTML(entrySlides));
-            // .width('100%')
-            // .height('20rem');
-            // .removeAttr('width');
-            // parsedSlidesTag.removeAttr('height');
-                parsedSlidesTag.width('100%')
-        parsedSlidesTag.css('min-height', '100%')
 
-        let abstractCol = $("<div/>", {
-            class: 'col-lg-6 mt-4'
-        });
         let abstractText = $("<p/>", {
             class: 'px-0 mx-0',
             style: 'font-size: .9rem;'
-        })
-            .text(entryAbstract);
+        });
+
+        let slidesCol;
+        let abstractCol;
+
+        if (entryAbstract !== 'TBD'){
+            slidesCol = $("<div/>", {
+                class: 'col-lg-6 mt-4 px-3 justify-content-center',
+                style: 'padding: 0; overflow: hidden;'
+            });
+            abstractText.text(entryAbstract);
+            abstractCol = $("<div/>", {
+                class: 'col-lg-6 mt-4'
+            });
+        }
+        else {
+            slidesCol = $("<div/>", {
+                class: 'col-lg-12 mt-4 px-3 justify-content-center',
+                style: 'padding: 0; overflow: hidden;'
+            });
+            abstractCol = $("<div/>", {
+                class: 'col-lg-12 mt-4'
+            });
+        }
+        let parsedSlidesTag = $($.parseHTML(entrySlides));
 
         entriesRow.append(card);
         card.append(title);
@@ -291,18 +297,15 @@ function addTalksEntriesWVideo() {
 }
 
 function goToHref(url = '') {
-    console.log('href', url);
-    url === '' ? window.location.href.split('#')[1] + '#' : url;
+    url = url === '' ? '#top' : url;
     if (url !== '') {
         let hrefPos = $(url).position().top;
-        console.log('pos', hrefPos);
         $("html").animate({
             scrollTop: hrefPos - navPos - margin
-        }, 600);
+        }, 100);
     } else {
         clickFirstIndex();
     }
-
 }
 
 function deleteTalksEntries() {
@@ -325,13 +328,12 @@ function changeField(el) {
     if (el.text !== curFilter) {
         deleteTalksEntries();
         deleteIndex();
-        if (el.text === STUDENT) {
+        if (el.text.trim() === STUDENT) {
             $(".student").addClass('active');
             $(".title").removeClass('active');
             sortData(talksList, 'Students');
-
         }
-        if (el.text === SUBMISSION) {
+        if (el.text.trim() === SUBMISSION) {
             $(".title").addClass('active');
             $(".student").removeClass('active');
             sortData(talksList, 'Title');
@@ -359,12 +361,11 @@ function addScrollSpy() {
                     let cardref = "#" + ref;
                     let theLink = $(aref);
                     let pos = $(cardref).offset();
-                    if (pos && !theLink.hasClass('active') && !theLink.hasClass('selected')) {
+                    if (pos && !theLink.hasClass('active')) {
                         let fromTop = pos.top - $(window).scrollTop();
                         if (fromTop <= navPos + 300) {
                             if (window.innerWidth < smallScreen) {
-                                $(".indexLink").removeClass('selected');
-                                theLink.addClass('selected');
+                                $("#selectIndexTag").val(theLink.val());
                             } else {
                                 $(".indexLink").removeClass('active');
                                 theLink.addClass('active');
@@ -380,8 +381,8 @@ function addScrollSpy() {
 function addHrefListener() {
     $(document).on("click", "#searchIndex", ev => {
         // ev.preventDefault();
-        let el = ev.target || ev.srcElement;
-        if (el instanceof HTMLAnchorElement && el.id !== 'a_') {
+        let el = ev.target;
+        if (el instanceof HTMLAnchorElement && el.id !== 'a_' && el.id !== 'top') {
             let hrefPos = $(el.getAttribute('href')).position().top;
             $("html").animate({
                 scrollTop: hrefPos - navPos - margin
@@ -407,6 +408,7 @@ function addOnSelectListener() {
         goToHref(child.attr('href'));
     });
 }
+
 
 function clickFirstIndex() {
     searchIndex.children()[0].click();
