@@ -13,10 +13,12 @@ h1 {
     font-size: 3rem !important;
 }
 
-h2 {
-    color: var(--light-grey);
-    font-weight: normal;
-    font-size: 1.2rem;
+
+h3 {
+    color: var(--light-grey) !important;
+    font-weight: lighter !important;
+    font-size: 1rem !important;
+    /*letter-spacing: .04rem;*/
 }
 
 .nav-link {
