@@ -15,7 +15,7 @@ window.onload = function () {
     d3.csv("../data/submissions.csv").then(data => {
         sortData(data, 'Students');
         addSearchIndex();
-        addTalksEntriesNoVideo();
+        addTalksEntriesWVideo();
         addHrefListener();
         addScrollSpy();
         goToHref();
@@ -159,7 +159,8 @@ function addTalksEntriesNoVideo() {
                 class: 'col-lg-12 mt-4'
             });
         }
-        let parsedSlidesTag = $($.parseHTML(entrySlides));
+        let parsedslidesFrame = $($.parseHTML(entrySlides));
+        parsedslidesFrame.classList.add('slides-frame');
 
         entriesRow.append(card);
         card.append(title);
@@ -179,7 +180,7 @@ function addTalksEntriesNoVideo() {
         card.append(containerRow);
         containerRow.append(slidesCol);
         containerRow.append(abstractCol);
-        slidesCol.append(parsedSlidesTag);
+        slidesCol.append(parsedslidesFrame);
         abstractCol.append(abstractText);
     })
 
@@ -209,14 +210,10 @@ function addTalksEntriesWVideo() {
             class: 'row mt-4 mx-5'
         });
         let videoCol = $("<div/>", {
-            class: 'col-6 justify-content-center'
+            class: 'col-md-6 justify-content-center video-div'
         });
-        let videoTag = $("<iframe/>", {
-            'width': '100%',
-            'height': '315',
-            'src': extractMediaLink(entryVideo, 'video'),
-            'allowfullscreen': true
-        });
+        let videoFrame = $($.parseHTML(entryVideo));
+        $(videoFrame)[0].classList.add('video-frame');
 
         let subtitleRow = $("<div/>", {
             class: 'row my-4 justify-content-center align-items-top'
@@ -251,17 +248,20 @@ function addTalksEntriesWVideo() {
         let major = $("<h5/>", {
             class: 'text-center'
         }).text(entryMajor);
+
         let majorIcon = $("<i/>", {
             class: "fas fa-building my-2"
         });
 
         let slidesCol = $("<div/>", {
-            class: 'col justify-content-center'
+            class: 'col-md-6 justify-content-center slides-col'
         });
-        let slidesTag = entrySlides;
+        let slidesFrame = $($.parseHTML(entrySlides));
+        $(slidesFrame)[0].classList.add('slides-frame');
         let abstractCol = $("<div/>", {
             class: 'col mt-4 px-5'
         });
+
         let abstractText = $("<p/>", {
             class: 'px-3 mx-0',
             style: 'font-size: .9rem;'
@@ -286,9 +286,9 @@ function addTalksEntriesWVideo() {
         majorCol.append(major);
         card.append(mediaRow);
         mediaRow.append(slidesCol);
-        slidesCol.append(slidesTag);
+        slidesCol.append(slidesFrame);
         mediaRow.append(videoCol);
-        videoCol.append(videoTag);
+        videoCol.append(videoFrame);
 
         card.append(abstractCol);
         abstractCol.append(abstractText);
@@ -342,7 +342,7 @@ function changeField(el) {
         }
         curFilter = el.text;
         addSearchIndex();
-        addTalksEntriesNoVideo();
+        addTalksEntriesWVideo();
         clickFirstIndex();
     }
 }
