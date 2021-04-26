@@ -1,3 +1,7 @@
+body {
+    height: 100vh;
+}
+
 .time-col {
     white-space: nowrap;
 }
@@ -31,6 +35,14 @@ td {
     th {
         top: 10em;
     }
+
+    .fixed-bottom {
+        position: sticky;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        z-index: 1030;
+    }
 }
 
 @media only screen and (max-width: 320px) {
@@ -41,4 +53,5 @@ td {
     th {
         top: 15em;
     }
+
 }
